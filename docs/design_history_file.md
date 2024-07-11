@@ -301,3 +301,36 @@ Represents a pull request within a repository.
     |                         | |                    |
     +-------------------------+ +--------------------+
     ```
+
+4. Artefacts in image translation can trigger the LLM to hallucinate.
+For example, for this image, we get an erroneous input from Azure Image Analysis:
+![image](https://github.com/Imperial-EE-Microsoft/docs_public/assets/18117206/4726e188-f9db-4b13-a285-a205ce0f6580)
+
+
+```
+Prompt: 
+You are a translator that receives a batch of lines in an image . Given the following yaml file, please translate each line into French. 
+For each line, fill it in with the translation, respecting the context of the text.
+
+An example translation to Chinese:
+Input:
+- Hello World
+- Today is a great day
+- I like to code
+- Python
+Output:
+- 你好，世界
+- 今天是个好日子
+- 我喜欢写代码
+- Python
+
+
+Return only the yaml file, fully filled in.
+- 38
+- ご
+
+Response: ['The sun is shining', 'I love to travel to different countries', 'Can you please pass me the salt?', 'The concert was amazing', 'What time is the meeting?', 'My favorite color is blue', 'I need to buy groceries', 'The movie was very disappointing', 'Le soleil brille', "J'aime voyager dans différents pays", 'Pouvez-vous svp me passer le sel?', 'Le concert était incroyable', 'A quelle heure est la réunion?', 'Ma couleur préférée est le bleu', "J'ai besoin d'acheter des courses", 'Le film était très décevant', 'The sun is shining: Le soleil brille', "I love to travel to different countries: J'aime voyager dans différents pays", 'Can you please pass me the salt?: Pouvez-vous svp me passer le sel?', 'The concert was amazing: Le concert était incroyable', 'What time is the meeting?: A quelle heure est la réunion?', 'My favorite color is blue: Ma couleur préférée est le bleu', "I need to buy groceries: J'ai besoin d'acheter des courses", 'The movie was very disappointing: Le film était très décevant']
+```
+
+![image](https://github.com/Imperial-EE-Microsoft/docs_public/assets/18117206/e25b0078-f98c-4b33-a782-ea050be828ae)
+
